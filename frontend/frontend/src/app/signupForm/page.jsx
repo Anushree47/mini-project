@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import toast from 'react-hot-toast';
+import toast, { ToastBar } from 'react-hot-toast';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -43,7 +43,7 @@ const Signup = () => {
       // }, 2000);
       axios.post('http://localhost:5000/user/add', values)
         .then((result) => {
-          toast.success('User Registered successfully');
+          toast.success('User Registered Successfully')
           resetForm();
           router.push('/loginForm');
         }).catch((err) => {
@@ -57,7 +57,7 @@ const Signup = () => {
   })
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen bg-gray-100'>
       <div className="max-w-lg mx-auto mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
         <div className="p-4 sm:p-7">
           <div className="text-center">
