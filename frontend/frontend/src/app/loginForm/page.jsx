@@ -1,45 +1,68 @@
 'use client';
 import { IconCheck, IconLoader3 } from '@tabler/icons-react';
+import axios from 'axios';
 import { useFormik } from 'formik';
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
-const loginnSchema = Yup.object().shape({
-//   name: Yup.string()
-//     .min(2, 'Too Short!')
-//     .max(50, 'Too Long!')
-//     .required('Naam nhi hai kya?'),
-  email: Yup.string().email('Email is required').required('Required'),
-  password: Yup.string().required('Password is required')
-//     .matches(/[a-z]/, 'lowercase letter is required')
-//     .matches(/[A-Z]/, 'uppercase letter is required')
-//     .matches(/[0-9]/, 'number is required')
-//     .matches(/\W/, 'special character is required')
-//     .min(8, 'Minimum 8 characters required'),
-//   confirmPassword: Yup.string().required('Please Confirm Password')
-//     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-});
+const LoginSchema = Yup.object().shape({
+    
+    email: Yup.string().email('Invalid email').required('Required'),
+    password:Yup.string().required('passward is required')
+    // .matches(/[a-z]/,'lowercase lettter is required')
+    // .matches(/[A-Z]/,'uppercase lettter is required')
+    // .matches(/[0-9]/,'number is required')
+    // .matches(/[\W]/,'symbol required')
+    // .min(8,'minimum 8 characters are required '),
+    
+  });
 
-const loginn = () => {
 
- // initializing formik
- const loginForm = useFormik({
-    initialValues: {
+const login = () => {
+  const router = useRouter()
+  //initialising formik
+  const loginForm = useFormik({
+    initialValues : {
+        
+        email : '',
+        password : '',
+        
+    },
+    onSubmit : (values, { resetForm, setSubmitting }) => {
+        setSubmitting(true);//form is submitting
+        // setTimeout(() => {
+        //     console.log(values);
+        //     resetForm();
+        // }, 2000);
+  
+        axios.post('http://localhost:5000/user/authenticate', values)
+        .then((result) => {// Assuming the token is in "data.token"
+          const token = result.data.token; 
+          if (token) {
+            localStorage.setItem('token', token); //save the token in localStorage
+          toast.success('User login successfully');
+          resetForm();
+          router.push('/');
+          }
+          else{
+            toast.error('Login failed, token not received.');
+          }
+        }).catch((err) => {
+          console.log(err);
+          toast.error(err?.response?.data?.message || 'something went wrong');
+          setSubmitting(false);
+        });
+  
+        //send values to backend
+     
+      },
+      validationSchema: LoginSchema
+    })
+    
       
-      email: '',
-      password: ''
-    },
-    onSubmit: (values, { resetForm }) => {
 
-      setTimeout(() => {
-        console.log(values);
-        resetForm();
-      }, 2000);
-
-      // send values to backend
-    },
-     validationSchema: loginnSchema
-  })
 
   return (
 
@@ -226,4 +249,4 @@ const loginn = () => {
 
   )}
 
-export default loginn
+export default login

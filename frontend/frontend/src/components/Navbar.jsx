@@ -1,14 +1,36 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+
+import React, { useEffect, useState } from 'react'
 
 const Navbar = () => {
+    
+
+    const [isLoggedin, setIsLoggedin] = useState(false);
+      
+        useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(token) {
+          setIsLoggedin(true);
+        }
+      },[]);
+      
+      const handleLogout =() => {
+        localStorage.removeItem('token');
+        setIsLoggedin(false);
+      };
+      
+        const handleLoginLogout =( ) => {
+          setIsLoggedin(!isLoggedin);
+        };
+      
     return (
         <div>
             <>
                 {/* ========== HEADER ========== */}
                 <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7 bg-gray-100">
                     <nav className="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-6 md:px-8 mx-auto">             
-                          <div className="md:col-span-3">
+                        <div className="md:col-span-3">
                             {/* Logo */}
                             <a
                                 className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
@@ -50,16 +72,25 @@ const Navbar = () => {
                                         fill="currentColor"
                                     /> */}
                             
-                            </a> 
+                            </a>
                             {/* End Logo */}
                         </div>
                         {/* Button Group */}
                         <div className="flex items-center gap-x-1 md:gap-x-2 ms-auto py-1 md:ps-6 md:order-3 md:col-span-3">
-                            <Link
+                            {/* <Link
                                 href='/loginForm'
+
                                 className="bg-green-600 text-white rounded-r-lg hover:bg-green-300 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium  border border-transparent  text-black  focus:outline-none focus:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none">
                                 Sign in
+                            </Link> */}
+                            <div>
+                            <Link
+                                className="bg-green-600 text-white rounded-r-lg hover:bg-green-300 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium  border border-transparent  text-black  focus:outline-none focus:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none"
+                                href={isLoggedin ? "#" : "/loginForm" }
+                                onClick={isLoggedin ? handleLogout : null} >
+                                {isLoggedin ? "Logout" : "Login"}
                             </Link>
+                            </div>
                             <Link
                                 href="/signupForm"
                                 className="bg-green-600 text-white rounded-r-lg hover:bg-green-300 py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium  border border-transparent  text-black  focus:outline-none focus:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none"                           >
@@ -142,7 +173,7 @@ const Navbar = () => {
                                         About
                                     </Link>
                                 </div>
-
+                               
                             </div>
                         </div>
                         {/* End Collapse */}

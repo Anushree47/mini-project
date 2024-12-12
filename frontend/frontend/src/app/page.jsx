@@ -1,6 +1,10 @@
 'use client'
 import React, { useState } from 'react'
 import CategoryDropdown from './CategoryDropdown/page';
+import Slide from '@/components/Slide';
+import Link from 'next/link';
+
+
 
 
 const App = () => {
@@ -27,7 +31,12 @@ const App = () => {
 
     return (
     <div className="font-sans">
-      
+       <div className='bg-slate-100'>
+    <div>
+      <Slide/>
+    </div>
+    
+    
       {/* Search Section */}
       <div className="p-6 bg-gray-100">
         <h2 className="text-2xl font-bold text-center mb-4">Find Equipment Near You</h2>
@@ -53,13 +62,15 @@ const App = () => {
             <h1 className="text-4xl font-bold mb-4">Efficient Farming Starts Here</h1>
             <p className="text-lg mb-6">Rent Top-Quality Agricultural Equipment at Affordable Rates</p>
             <div className="space-x-4">
-            <button className="w-30 px-6 py-2 bg-blue-600 rounded-lg hover:bg-green-500 text-lg">Browse Equipment</button>
-            <button className="px-6 py-2 bg-blue-600 rounded-lg hover:bg-green-500"><CategoryDropdown/></button>
-        
+            {/* <button className="w-30 px-6 py-2 bg-blue-600 rounded-lg hover:bg-green-500 text-lg">Browse Equipment</button> */}
+            {/* <button className="px-6 py-2 bg-blue-600 rounded-lg hover:bg-green-500"></button> */}
+        <Link className="w-30 px-6 py-2 bg-blue-600 rounded-lg hover:bg-green-500 text-lg " href='/viewEquipment'>Browse Equipment</Link>
       
             </div>
         </div>
         </div>
+       
+    </div>
 
 {/* 
       Categories Section
@@ -81,6 +92,8 @@ const App = () => {
           ))}
         </div>
       </div> */}
+
+
 
       {/* Why Choose Us Section */}
       <div className="p-6 bg-gray-100">
