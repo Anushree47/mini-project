@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import CategoryDropdown from './CategoryDropdown/page';
+
 import Slide from '@/components/Slide';
 import Link from 'next/link';
 
@@ -14,13 +14,7 @@ const App = () => {
     // alert(Searching : {searchQuery});
     // };
 
-    const categories = [
-    // { id: 1, name: "Tractors", img },
-    // { id: 2, name: "Harvesters", image: "harvester.jpg" },
-    // { id: 3, name: "Irrigation Systems", image: "irrigation.jpg" },
-    // { id: 4, name: "Soil Tools", image: "soil.jpg" },
-    // {   }
-    ];
+    
 
     const benefits = [
     "Affordable Rentals",
@@ -30,8 +24,8 @@ const App = () => {
     ];
 
     return (
-    <div className="font-sans">
-       <div className='bg-slate-100'>
+    <div className="font-sans  ">
+       <div className='bg-gradient-to-r from-blue-400 to-green-300'>
     <div>
       <Slide/>
     </div>
@@ -71,29 +65,6 @@ const App = () => {
         </div>
        
     </div>
-
-{/* 
-      Categories Section
-      <div className="p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Our Categories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className="flex flex-col items-center bg-white p-4 shadow-lg rounded-lg"
-            >
-              <img
-                src="category.jpg"
-                alt={category.name}
-                className="h-32 w-32 object-cover mb-4"
-              />
-              <h3 className="text-lg font-semibold">{category.name}</h3>
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-
 
       {/* Why Choose Us Section */}
       <div className="p-6 bg-gray-100">

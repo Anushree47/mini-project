@@ -1,127 +1,88 @@
-const express = require('express');
+const express = require("express");
+const rentNow = require('../model/rentNowModel');
+
+const productRouter = require('../model/productModel');
+
 const router = express.Router();
 
+router.post('/submit', async (req, res) => {
+    try{
+        const { Name, email, phoneNumber, address,  category , duration,totalAmnt, toolId, toolTitle, toolImage } = req.body;
 
+        if( !Name || !email || !phoneNumber || !address ||  !category || !duration || !totalAmnt || !toolId || !toolTitle || !toolImage) {
+            return res.status(400).json({ message: 'All fields are required'});
+        }
 
-router.post('/add', (req, res) => {
-  console.log(req.body);
+        const newRequest = new rentNow({ 
+            Name,
+            email,
+            phoneNumber,
+            address,
+            category ,
+            duration,
+            totalAmnt,
+            toolId,
+            toolTitle,
+            toolImage
+             });
+             
+        await newRequest.save();
 
-  new Model(req.body).save()
-      .then((result) => {
-          res.status(200).json(result);
-      }).catch((err) => {
-          
-          console.log(err);
-          if(err?.code===11000){res.status(500).json({message : 'Email already existed'});}
-          else
-          {
-              res.status(500).json({message : 'Internal server error'})
-          }
-         
-      });
+        
+
+        res.status(200).json({ message: 'Form submitted successfully'});
+    } catch (err) {
+        console.error('Error occurred:' ,err);
+        res.status(500).json({ message: 'Internal Server Error'});
+    }
 });
-//getall
-router.get('/getall', (req, res) => {
-  Model.find()
 
-      .then((result) => {
-          res.status(200).json(result);
-      }).catch((err) => {
-          res.status(500).json(err);
-      });
-})
+router.get('/getall', async (req, res) => {
+    Adoption.find()
+    .then((result) => {
+        res.status(200).json(result);
+    }).catch((err) => {
+        res.status(500).json(err);
+    });
 
+    // try {
+    //     const adoptionRequests = await Adoption.aggregate([
+    //         {
+    //             $lookup: {
+    //                 from: 'pets', // Collection name in the database
+    //                 localField: 'petId', // Field in the adoption schema
+    //                 foreignField: '_id', // Field in the pet schema
+    //                 as: 'petDetails', // Output array field name
+    //             },
+    //         },
+    //         {
+    //             $unwind: '$petDetails', // Flatten the pet details
+    //         },
+    //         {
+    //             $project: {
+    //                 fullName: 1,
+    //                 email: 1,
+    //                 phoneNumber: 1,
+    //                 details: 1,
+    //                 submittedAt: 1,
+    //                 'petDetails.title': 1,
+    //                 'petDetails.imageUrl': 1,
+    //             },
+    //         },
+    //     ]);
+    //     res.status(200).json(adoptionRequests);
+    // } catch (err) {
+    //     res.status(500).json({ error: 'Failed to fetch adoption requests.', details: err.message });
+    // }
+});
 
-//: denotes url parameter
-router.get('/getbycity/:city', (req, res) => {
-  Model.find({ city: req.params.city })
-      .then((result) => {
-          res.status(200).json(result);
-      }).catch((err) => {
-          res.status(500).json(err);
-      });
-})
-
-
-//get by id 
-router.get('/getbyid/:id', (req, res) => {
-  Model.findById(req.params.id)
-      .then((result) => {
-          res.status(200).json(result);
-      }).catch((err) => {
-          res.status(500).json(err);
-      });
-})
-// delete
-router.delete('/delete/:id',(req, res) =>  {
-
-  Model.findByIdAndDelete(req.params.id)
-      .then((result) => {
-          res.status(200).json(result);
-      }).catch((err) => {
-          console.log(err);
-          res.status(500).json(err);
-      });
-  })
-
-// update
-router.put('/update/:id',(req, res) => {
-  Model.findByIdAndUpdate(req.params.id,req.body , {new : true })
-      .then((result) => {
-          res.status(200).json(result);
-      }).catch((err) => {
-          console.log(err);
-          res.status(500).json(err);
-      });
-
-})
-
-
-router.post('/authenticate', (req,res)=>
-{
-  Model.findOne(req.body)
-  .then((result) => {
-      if(result)
-      {
-          //email and password matched
-          //generate token
-
-              const {_id,email,password} = result
-              const payload =  {_id,email,password}
-              jwt.sign
-              (  
-                   payload,
-                  process.env.JWT_SECRET,
-                  {expiresIn:'1h'},
-                  (err,token) => 
-                      {
-                      if(err)
-                      {
-
-                      {}
-                  console.log(err);
-                      
-                          res.status(500).json(err)
-                      }
-                      else
-                      {
-                          res.status(200).json(token)
-                      }
-                  }
-              )
-
-      }
-      else
-      {
-          res.status(401).json({message: 'Invalid email or password '})
-      }
-  })
-  .catch((err) => {
-      console.log(err);
-      res.status(500).json(err)
-      
-  });
-})
-
+router.delete('/delete/:id', (req, res) => {
+    Adoption.findByIdAndDelete(req.params.id)
+    .then((result) => {
+        res.status(200).json(result);
+    }).catch((err) => {
+        res.status(500).json(err);
+    });
+});
 
 module.exports = router;

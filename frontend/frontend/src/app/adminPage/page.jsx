@@ -18,6 +18,11 @@ const Adminpage = () => {
             </Link>
           </li>
           <li>
+            <Link href="/product" className='hover:text-lime-600'>
+           Tool Form
+            </Link>
+          </li>
+          <li>
           <Link href="/adoption-request" className='hover:text-lime-600'>
             Rental Request
             </Link>

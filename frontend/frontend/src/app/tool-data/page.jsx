@@ -2,6 +2,7 @@
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import axios from 'axios'
 import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 
@@ -38,7 +39,7 @@ const Managetool = () => {
 
 
     return (
-        <div className='h-screen bg-gray-200'>
+        <div className='min-h-screen bg-gray-200'>
             <h1 className='text-3xl font-bold text-center'>User Messages</h1>
             <div className='container mx-auto'>
                 {
@@ -55,7 +56,6 @@ const Managetool = () => {
                                         <th>Price</th>
                                         <th>Features</th>
                                         <th>Description</th>
-                                        <th>RegisteredAt</th>
                                         <th>Image</th>
                                         <th>Delete</th>
                                         <th>Update</th>
@@ -71,16 +71,17 @@ const Managetool = () => {
                                                 <td className='p-2  border border-black-100'>{product.name}</td>
                                                 <td className='p-2  border border-black-100'>{product.title}</td>
                                                 <td className='p-2  border border-black-100'>{product.category}</td>
-                                                <td className='p-2  border border-black-100'>{product.features.substring(0, 20)}</td>
                                                 <td className='p-2  border border-black-100'>{product.price}</td>
+                                                <td className='p-2  border border-black-100'>{product.features.substring(0, 20)}</td>
+                                                <td className='p-2  border border-black-100'>{product.description.substring(0, 20)}</td>
                                                 <td className='p-2  border border-black-100'>
                                                     <img src={product.imageUrl} alt="" />
                                                 </td>
-                                                <td className='p-2  border border-black-100'>{product.createdAt}</td>
+
                                                 <td className='p-2  border border-black-100' >
                                                     <button onClick={() => { deleteTool(product._id) }} className='bg-red-500 text-white px-2 py-1 rounded'> <IconTrash></IconTrash></button></td>
                                                 <td className='p-2  border border-black-100'>
-                                                    <Link href={'/updateuser/' + product._id} className='bg-blue-800 text-white block w-fit px-2 py-1 rounded '> <IconPencil></IconPencil></Link></td>
+                                                    <Link href={'/updateTool/' + product._id} className='bg-blue-800 text-white block w-fit px-2 py-1 rounded '> <IconPencil></IconPencil></Link></td>
                                             </tr>
                                         })
                                     }

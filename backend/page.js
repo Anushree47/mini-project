@@ -3,7 +3,7 @@ const express = require('express');
 const UserRouter = require( './routers/userRouter');
 const contactRouter = require('./routers/contactRouter');
 const rentNowRouter = require('./routers/rentNowRouter');
-const toolRouter = require('./routers/toolRouter');
+
 const productRouter = require('./routers/productRouter');
 const adminRouter = require('./routers/adminRouter');
 const cors = require('cors');
@@ -26,7 +26,6 @@ app.use(express.json());
 app.use('/user', UserRouter);
 app.use('/contact', contactRouter);
 app.use('/rentNow', rentNowRouter);
-app.use('/tool', toolRouter);
 app.use('/product', productRouter);
 app.use('/admin', adminRouter);
 
