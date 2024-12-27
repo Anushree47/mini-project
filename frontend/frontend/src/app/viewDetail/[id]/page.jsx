@@ -41,7 +41,7 @@ function ViewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 bg-gradient-to-r from-blue-400 to-green-300">
+    <div className="min-h-screen bg-gray-100 bg-gradient-to-r from-emerald-300 to-stone-300">
       <header className=" text-white p-4 shadow-md bg-green-600">
         <div className="container mx-auto ">
         <h1 className='text-2xl text-center font-bold mb-6 '>  Tool Details</h1>

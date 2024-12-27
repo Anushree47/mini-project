@@ -23,11 +23,12 @@ const Card = ({ title,description, imageUrl, id }) => {
 
     {/* Button Section */}
     <div className="flex gap-5">
+    
       <Link
         className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-white border border-gray-200 text-black hover:bg-gray-100 
         focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-white/10 dark:text-white dark:hover:text-white dark:focus:text-white"
         aria-label="Primary Action"
-        href={"/rentNow"}
+        href={'/rentNow/'+id}
       >
         Rent Now
       </Link>
@@ -45,15 +46,7 @@ const Card = ({ title,description, imageUrl, id }) => {
     </div>
     
     </div>
-    // <div className='bg-white-500 p-5 rounded-lg border space-y-5'>
-    //   <h1 className='text-3xl font-bold'>{title}</h1>
-    //   <p>{description}</p>
-
-    //   <div className='flex gap-5'>
-    //     <button className='bg-black px-2 py-1 rounded-md text-white'>primary button</button>
-    //     <button className=' px-2 py-1 rounded-md '>second button</button>
-    //   </div>
-    // </div>
+    
     );
 };
 

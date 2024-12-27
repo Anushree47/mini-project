@@ -97,7 +97,7 @@ router.post('/authenticate', (req,res)=>
             jwt.sign(
                 payload,
                 secretKey,
-                { expiresIn: '1hr' },
+                { expiresIn: '20min' },
                 (err,token) => {
                     if(err){
                         console.log(err);

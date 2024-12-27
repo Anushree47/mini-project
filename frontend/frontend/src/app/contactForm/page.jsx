@@ -33,10 +33,11 @@ const Contact = () => {
 })
 
 return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-emerald-300 to-stone-200">
     <div className="w-80 p-6 bg-white rounded-lg shadow-md">
     <h2 className="text-2xl font-bold mb-4 text-center">Contact Us</h2>
     {/* Form */}
+    <div className="mb-4">
     <form onSubmit={contactForm.handleSubmit} >
               <div className="grid gap-y-4">
                 {/* Form Group */}
@@ -232,6 +233,7 @@ return (
                 </button>
               </div>
     </form>
+    </div>
     </div>
     </div>
 );

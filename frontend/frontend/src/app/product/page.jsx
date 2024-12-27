@@ -3,7 +3,7 @@ import { IconCheck, IconLoader3 } from '@tabler/icons-react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 
@@ -14,6 +14,7 @@ const ProductSchema = Yup.object().shape({
 });
 
 const ProductCard = () => {
+  const token= localStorage.getItem('token')
   const router = useRouter();
 
   // initializing formik
@@ -43,7 +44,15 @@ const ProductCard = () => {
     },
 
   })
-
+  useEffect(() => {
+    if(!token)
+{
+toast.error("login is required")
+router.push('/loginForm')
+}    
+    
+  }, [])
+  
   const uploadImage = async (e) => {
     const file = e.target.files[0]
     const formData = new FormData()

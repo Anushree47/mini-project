@@ -44,7 +44,7 @@ const login = () => {
             localStorage.setItem('token', token); //save the token in localStorage
           toast.success('User login successfully');
           resetForm();
-          router.push('/');
+          router.push('/adminPage');
           }
           else{
             toast.error('Login failed, token not received.');
@@ -76,7 +76,7 @@ const login = () => {
         Don't have an account yet?
         <a
           className="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-          href="/signupForm"
+          href="../examples/html/signup.html"
         >
           Sign up here
         </a>

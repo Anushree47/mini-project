@@ -10,7 +10,8 @@ const Managetool = () => {
 
     const [toolList, setToolList] = useState([])
     const [loading, setLoading] = useState(false)
-
+    const token= localStorage.getItem('token')
+    const router = useRouter()
     const fetchUsers = async (e) => {
         setLoading(true)
         const res = await axios.get('http://localhost:5000/product/getall')
@@ -23,6 +24,14 @@ const Managetool = () => {
     useEffect(() => {
         fetchUsers();
     }, []);
+    useEffect(() => {
+        if(!token)
+  {
+    toast.error("login is required")
+  router.push('/login')
+  }    
+        
+      }, [])
 
     const deleteTool = async (id) => {
         if (!confirm('Are you sure you want to delete this tool')) return
@@ -40,7 +49,7 @@ const Managetool = () => {
 
     return (
         <div className='min-h-screen bg-gray-200'>
-            <h1 className='text-3xl font-bold text-center'>User Messages</h1>
+            <h1 className='text-3xl font-bold text-center'>Tool Data</h1>
             <div className='container mx-auto'>
                 {
                     loading ? <p className='text-centre text-gray-500 text-2xl font-bold'>Loading....Please Wait

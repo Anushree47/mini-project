@@ -1,28 +1,15 @@
-// const { Schema, model } = require('../connection');
-
-// const mySchema = new Schema({
-//     name: String,
-//     email: { type: String, unique: true },
-//     address: { type: String, required: true },
-//     item: { type: String, default: 'unknown' },
-//     duration: { type: String, default: 'unknown' },
-//     createdAt: { type: Date, default: Date.now }
-// });
-
-
-
-const { default: mongoose } = require('mongoose');
-const { Schema, model } = require('../connection');
+const { Schema, model, Types } = require('../connection');
 
 const mySchema = new Schema({
-    Name: {
+    product: { type: Types.ObjectId, ref: "product" },
+    fullName: {
         type: String,
         required: true,
     },
 
     email: {
         type: String,
-        required:true,
+        required: true,
     },
 
     phoneNumber: {
@@ -30,31 +17,22 @@ const mySchema = new Schema({
         required: true,
     },
     address:
-     { type: String, 
-    required: true
- },
+    {
+        type: String,
+        required: true
+    },
     category:
-     { type: String, 
-    required: true
- },
-
+    {
+        type: String,
+        required: true
+    },
     duration: {
         type: Number,
         required: true,
     },
-    totalAmnt: {
+    totalAmount: {
         type: Number,
         required: true,
-    },
-
-    toolId: {type: mongoose.Schema.Types.ObjectId, ref: 'tools', required: true},
-
-    submittedAt: {
-        type:Date,
-        default: Date.now,
-    },
-
-    
-    
+    }
 });
 module.exports = model('rentNow', mySchema);

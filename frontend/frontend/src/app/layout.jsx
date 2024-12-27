@@ -1,6 +1,9 @@
 import localFont from "next/font/local";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
+import ConditionalLayout from "@/components/ConditionalLayout";
+
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
@@ -26,10 +29,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
         <Toaster></Toaster>
-        {children}
-        <Footer></Footer>
+        {/* {children}
+        <Footer></Footer> */}
+         <ConditionalLayout>
+          {children}
+          </ConditionalLayout>
       </body>
     </html>
   );

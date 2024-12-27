@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="bg-gray-100"><>
     {/* ========== FOOTER ========== */}
-    <footer className="bg-gray-100 mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto ">
+    <footer className=" mt-auto w-full min-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto  bg-gray-800 text-white p-4 text-center">
       {/* Grid */}
       <div className="text-center ">
         <div>
@@ -29,9 +29,9 @@ const Footer = () => {
             </a>{" "}
             family.
           </p>
-          <p className="text-gray-500 dark:text-neutral-500">
-            © 2024 AGRICULTURE RENTALS.
-          </p>
+          
+        <p>&copy; {new Date().getFullYear()} Agricultural Rentals. All Rights Reserved.</p>
+      
         </div>
         {/* Social Brands */}
         <div className="mt-3 space-x-2">

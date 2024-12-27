@@ -2,6 +2,7 @@
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import axios from 'axios'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 
@@ -9,6 +10,8 @@ const ManageContact = () => {
 
      const [ userList , setUserList] = useState([])
      const [loading , setLoading] = useState(false)
+ const token= localStorage.getItem('token')
+  const router = useRouter();
 
     const fetchUsers= async() =>{
         setLoading(true)
@@ -22,7 +25,15 @@ const ManageContact = () => {
     useEffect(() => {
         fetchUsers();
     }, []);
-    
+    useEffect(() => {
+        if(!token)
+  {
+    toast.error("login is required")
+  router.push('/login')
+  }    
+        
+      }, [])
+
     const deleteUser = async (id) =>{
         if(!confirm('Are you sure you want to delete this message'))return
 
